@@ -40,3 +40,25 @@ lightbox.addEventListener("click", e => {
 document.addEventListener("keydown", e => { if (e.key === "Escape") lightbox.hidden = true; });
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
+// Flyers stay hidden until the visitor taps "View my work" (or "Work" in the menu)
+const workSection = document.getElementById("work");
+function showWork() {
+  workSection.hidden = false;
+  setTimeout(() => workSection.scrollIntoView({ behavior: "smooth" }), 50);
+}
+document.querySelectorAll('a[href="#work"]').forEach(a =>
+  a.addEventListener("click", e => { e.preventDefault(); showWork(); })
+);
+
+// Three-line menu (mobile)
+const menuBtn = document.getElementById("menu");
+const navEl = document.getElementById("nav");
+menuBtn.addEventListener("click", () => {
+  const open = navEl.classList.toggle("open");
+  menuBtn.innerHTML = open ? "&#10005;" : "&#9776;";
+});
+navEl.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+  navEl.classList.remove("open");
+  menuBtn.innerHTML = "&#9776;";
+}));
