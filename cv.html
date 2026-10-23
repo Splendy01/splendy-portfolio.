@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free CV Builder | Splendy Gift Designs</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#101418;--muted:#5b6470;--line:#e3e6ea;--alt:#f5f6f8;--accent:#1f3a5f}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--alt);line-height:1.5}
+.top{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:#fff;border-bottom:1px solid var(--line)}
+.top a{color:var(--accent);font-weight:500;text-decoration:none;font-size:.9rem}
+.top b{letter-spacing:.1em;font-size:.85rem}
+.wrap{max-width:1200px;margin:0 auto;padding:20px;display:grid;grid-template-columns:380px 1fr;gap:24px;align-items:start}
+.panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}
+.panel h2{font-size:1rem;margin:18px 0 10px}
+.panel h2:first-child{margin-top:0}
+label{display:block;font-size:.78rem;color:var(--muted);margin:10px 0 4px}
+input,textarea,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:6px;font:inherit;font-size:.92rem;background:#fff}
+textarea{min-height:70px;resize:vertical}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.entry{border:1px dashed var(--line);border-radius:8px;padding:12px;margin-bottom:10px;position:relative}
+.entry .rm{position:absolute;top:6px;right:8px;border:0;background:none;color:#b42318;cursor:pointer;font-size:.8rem}
+button.btn{padding:11px 16px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:#fff;font:inherit;font-weight:500;cursor:pointer}
+button.btn.ghost{background:#fff;color:var(--accent)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.note{font-size:.78rem;color:var(--muted);margin-top:8px}
+
+/* CV preview */
+.pwrap{overflow:auto}
+#cv{--c:#1f3a5f;background:#fff;width:100%;max-width:794px;margin:0 auto;padding:40px;border:1px solid var(--line);min-height:600px;font-size:13px;line-height:1.5;color:#1b1f24}
+#cv h1{font-size:30px;line-height:1.1}
+#cv .ttl{color:var(--c);font-weight:500;margin-top:4px;font-size:15px}
+#cv .contact{color:#555;margin-top:6px;font-size:12px}
+#cv h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin:20px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--c)}
+#cv .item{margin-bottom:10px}
+#cv .item .h{display:flex;justify-content:space-between;gap:10px;font-weight:600}
+#cv .item .h span{font-weight:400;color:#666;white-space:nowrap}
+#cv .item .s{color:#555}
+#cv ul{margin:4px 0 0 18px}
+#cv .skills{display:flex;flex-wrap:wrap;gap:6px}
+#cv .skills span{background:#eef1f5;padding:3px 10px;border-radius:999px;font-size:12px}
+#cv .head{display:flex;justify-content:space-between;align-items:center;gap:16px}
+#cv .photo{width:90px;height:90px;border-radius:50%;object-fit:cover}
+/* templates */
+#cv.t-classic{font-family:Georgia,'Times New Roman',serif}
+#cv.t-classic .head{flex-direction:column;text-align:center;border-bottom:2px solid var(--c);padding-bottom:12px}
+#cv.t-classic h3{border-bottom:1px solid #ccc;color:#111}
+#cv.t-modern .head{background:var(--c);color:#fff;margin:-40px -40px 20px;padding:32px 40px}
+#cv.t-modern .ttl,#cv.t-modern .contact{color:#e6edf6}
+#cv.t-minimal h1{font-weight:500;letter-spacing:.02em}
+#cv.t-minimal h3{border:0;letter-spacing:.2em;color:#111;margin-bottom:6px}
+
+@media(max-width:900px){.wrap{grid-template-columns:1fr;padding:12px}#cv{padding:22px}#cv.t-modern .head{margin:-22px -22px 16px;padding:22px}}
+@media print{
+  @page{margin:0}
+  body{background:#fff}
+  .top,.panel,.note,.nopr{display:none!important}
+  .wrap{display:block;padding:0;max-width:none}
+  #cv{border:0;max-width:none;width:100%;margin:0;padding:14mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  #cv.t-modern .head{margin:-14mm -14mm 6mm;padding:12mm 14mm}
+}
+</style>
+</head>
+<body>
+<div class="top nopr"><a href="index.html">&larr; Back to site</a><b>CV BUILDER</b></div>
+
+<div class="wrap">
+  <div class="panel">
+    <h2>Template</h2>
+    <div class="row">
+      <div><label>Style</label>
+        <select id="tpl"><option value="t-modern">Modern</option><option value="t-classic">Classic</option><option value="t-minimal">Minimal</option></select></div>
+      <div><label>Color</label>
+        <select id="color"><option value="#1f3a5f">Navy</option><option value="#0f766e">Teal</option><option value="#7c3aed">Purple</option><option value="#b45309">Gold</option><option value="#b42318">Red</option><option value="#111827">Black</option></select></div>
+    </div>
+
+    <h2>Personal details</h2>
+    <label>Full name</label><input id="name" placeholder="e.g. Ada Okafor">
+    <label>Job title</label><input id="title" placeholder="e.g. Graphic Designer">
+    <div class="row">
+      <div><label>Email</label><input id="email" type="email" placeholder="you@email.com"></div>
+      <div><label>Phone</label><input id="phone" placeholder="0803 000 0000"></div>
+    </div>
+    <label>Location</label><input id="location" placeholder="Lagos, Nigeria">
+    <label>Photo (optional)</label><input id="photo" type="file" accept="image/*">
+
+    <h2>Summary</h2>
+    <textarea id="summary" placeholder="2-3 lines about you and what you do best"></textarea>
+
+    <h2>Work experience</h2>
+    <div id="jobs"></div>
+    <button class="btn ghost" id="addJob" type="button">+ Add job</button>
+
+    <h2>Education</h2>
+    <div id="edus"></div>
+    <button class="btn ghost" id="addEdu" type="button">+ Add education</button>
+
+    <h2>Skills</h2>
+    <label>Separate with commas</label>
+    <textarea id="skills" placeholder="Photoshop, Illustrator, Branding, Communication"></textarea>
+
+    <div class="actions">
+      <button class="btn" id="pdf" type="button">Download PDF</button>
+      <button class="btn ghost" id="clear" type="button">Clear all</button>
+    </div>
+    <p class="note">Tap Download PDF, then choose "Save as PDF" as the printer. Your details stay on your device and are not sent anywhere.</p>
+  </div>
+
+  <div class="pwrap"><div id="cv" class="t-modern"></div></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fields = ["tpl","color","name","title","email","phone","location","summary","skills"];
+let jobs = [{role:"",company:"",period:"",desc:""}];
+let edus = [{degree:"",school:"",period:""}];
+let photo = "";
+
+function save(){
+  try{
+    const d = {jobs, edus, photo};
+    fields.forEach(f => d[f] = $(f).value);
+    localStorage.setItem("splendy-cv", JSON.stringify(d));
+  }catch(e){}
+}
+function load(){
+  try{
+    const d = JSON.parse(localStorage.getItem("splendy-cv") || "null");
+    if(!d) return;
+    fields.forEach(f => { if(d[f] !== undefined) $(f).value = d[f]; });
+    if(d.jobs && d.jobs.length) jobs = d.jobs;
+    if(d.edus && d.edus.length) edus = d.edus;
+    photo = d.photo || "";
+  }catch(e){}
+}
+
+function listUI(){
+  $("jobs").innerHTML = jobs.map((j,i)=>`
+    <div class="entry">
+      <button class="rm" data-t="jobs" data-i="${i}" type="button">Remove</button>
+      <label>Job title</label><input data-t="jobs" data-i="${i}" data-k="role" value="${esc(j.role)}">
+      <div class="row">
+        <div><label>Company</label><input data-t="jobs" data-i="${i}" data-k="company" value="${esc(j.company)}"></div>
+        <div><label>Period</label><input data-t="jobs" data-i="${i}" data-k="period" placeholder="2022 - Present" value="${esc(j.period)}"></div>
+      </div>
+      <label>What you did (one point per line)</label>
+      <textarea data-t="jobs" data-i="${i}" data-k="desc">${esc(j.desc)}</textarea>
+    </div>`).join("");
+  $("edus").innerHTML = edus.map((e,i)=>`
+    <div class="entry">
+      <button class="rm" data-t="edus" data-i="${i}" type="button">Remove</button>
+      <label>Degree / Course</label><input data-t="edus" data-i="${i}" data-k="degree" value="${esc(e.degree)}">
+      <div class="row">
+        <div><label>School</label><input data-t="edus" data-i="${i}" data-k="school" value="${esc(e.school)}"></div>
+        <div><label>Period</label><input data-t="edus" data-i="${i}" data-k="period" placeholder="2018 - 2022" value="${esc(e.period)}"></div>
+      </div>
+    </div>`).join("");
+}
+
+function preview(){
+  const v = id => $(id).value.trim();
+  const cv = $("cv");
+  cv.className = $("tpl").value;
+  cv.style.setProperty("--c", $("color").value);
+  const contact = [v("email"), v("phone"), v("location")].filter(Boolean).map(esc).join(" &nbsp;•&nbsp; ");
+  const jobsHtml = jobs.filter(j => j.role || j.company).map(j => {
+    const pts = (j.desc||"").split("\n").map(s=>s.trim()).filter(Boolean);
+    return `<div class="item"><div class="h">${esc(j.role)}<span>${esc(j.period)}</span></div>
+      <div class="s">${esc(j.company)}</div>${pts.length?"<ul>"+pts.map(p=>`<li>${esc(p)}</li>`).join("")+"</ul>":""}</div>`;
+  }).join("");
+  const eduHtml = edus.filter(e => e.degree || e.school).map(e =>
+    `<div class="item"><div class="h">${esc(e.degree)}<span>${esc(e.period)}</span></div><div class="s">${esc(e.school)}</div></div>`).join("");
+  const sk = v("skills").split(",").map(s=>s.trim()).filter(Boolean);
+  cv.innerHTML = `
+    <div class="head">
+      <div><h1>${esc(v("name")) || "Your Name"}</h1>
+        <div class="ttl">${esc(v("title")) || "Your Job Title"}</div>
+        <div class="contact">${contact || "email • phone • location"}</div></div>
+      ${photo ? `<img class="photo" src="${photo}" alt="">` : ""}
+    </div>
+    ${v("summary") ? `<h3>Profile</h3><p>${esc(v("summary"))}</p>` : ""}
+    ${jobsHtml ? `<h3>Experience</h3>${jobsHtml}` : ""}
+    ${eduHtml ? `<h3>Education</h3>${eduHtml}` : ""}
+    ${sk.length ? `<h3>Skills</h3><div class="skills">${sk.map(s=>`<span>${esc(s)}</span>`).join("")}</div>` : ""}`;
+  save();
+}
+
+document.addEventListener("input", e => {
+  const t = e.target;
+  if(t.dataset && t.dataset.t){ (t.dataset.t === "jobs" ? jobs : edus)[t.dataset.i][t.dataset.k] = t.value; }
+  preview();
+});
+document.addEventListener("click", e => {
+  const t = e.target;
+  if(t.classList.contains("rm")){
+    const arr = t.dataset.t === "jobs" ? jobs : edus;
+    arr.splice(+t.dataset.i, 1);
+    if(!arr.length) arr.push(t.dataset.t === "jobs" ? {role:"",company:"",period:"",desc:""} : {degree:"",school:"",period:""});
+    listUI(); preview();
+  }
+});
+$("addJob").onclick = () => { jobs.push({role:"",company:"",period:"",desc:""}); listUI(); preview(); };
+$("addEdu").onclick = () => { edus.push({degree:"",school:"",period:""}); listUI(); preview(); };
+$("photo").onchange = e => {
+  const f = e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = () => { photo = r.result; preview(); };
+  r.readAsDataURL(f);
+};
+$("pdf").onclick = () => window.print();
+$("clear").onclick = () => {
+  if(!confirm("Clear everything?")) return;
+  fields.forEach(f => { if(f!=="tpl" && f!=="color") $(f).value = ""; });
+  jobs = [{role:"",company:"",period:"",desc:""}];
+  edus = [{degree:"",school:"",period:""}];
+  photo = ""; $("photo").value = "";
+  listUI(); preview();
+};
+
+load(); listUI(); preview();
+</script>
+</body>
+</html>
